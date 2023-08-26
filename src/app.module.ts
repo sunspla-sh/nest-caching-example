@@ -1,5 +1,4 @@
 import { Module, ValidationPipe } from '@nestjs/common';
-import { CacheModule } from '@nestjs/cache-manager';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -8,7 +7,6 @@ import { APP_PIPE } from '@nestjs/core';
 
 @Module({
   imports: [
-    CacheModule.register(),
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
       database: 'dev.db',
@@ -28,5 +26,6 @@ import { APP_PIPE } from '@nestjs/core';
       }),
     },
   ],
+  exports: [],
 })
 export class AppModule {}
