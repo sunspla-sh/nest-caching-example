@@ -2,23 +2,25 @@ import { check } from 'k6';
 import http from 'k6/http';
 
 export const options = {
-  //define thresholds
   thresholds: {
-    http_req_failed: ['rate<0.01'], //less than 1% of http requests fail with error
-    http_req_duration: ['p(99)<1000'], //less than 1% of http requests take longer than 1000ms
+    http_req_failed: [{ threshold: 'rate<0.01', abortOnFail: true }], //http errors should be less than 1%, otherwise abort the testg
+    http_req_duration: ['p(99)<1000'],
   },
-  //define scenarios
   scenarios: {
-    //arbitrary name of scenarios
-    average_load: {
+    //define scenarios
+    breaking: {
+      //arbitrary name
       executor: 'ramping-vus',
       stages: [
-        //ramp up to avg load of 20 virtual users
         { duration: '10s', target: 20 },
-        //maintain load
         { duration: '50s', target: 20 },
-        //ramp down to zero
-        { duration: '5s', target: 0 },
+        { duration: '50s', target: 40 },
+        { duration: '50s', target: 60 },
+        { duration: '50s', target: 80 },
+        { duration: '50s', target: 100 },
+        { duration: '50s', target: 120 },
+        { duration: '50s', target: 140 },
+        //... should break at somepoint before we reach 140
       ],
     },
   },
