@@ -36,4 +36,4 @@ lerna-debug.log*
 
 *.env
 *.db
-**/k6/*.json
+**/k6/**/*.json
