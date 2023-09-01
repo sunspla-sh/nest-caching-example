@@ -6,6 +6,6 @@ export const thresholdSettings = {
 export const breakpointWorkload = {
   executor: 'ramping-arrival-rate', //assure load increase if the system slows
   preAllocatedVUs: 10,
-  maxVUs: 100000,
+  maxVUs: 15000,
   stages: [{ duration: '1m', target: 100000 }],
 };

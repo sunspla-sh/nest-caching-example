@@ -3,5 +3,5 @@ import { sleep } from 'k6';
 
 export function catsGet(baseUrl) {
   http.get(`${baseUrl}/cats`);
-  sleep(1);
+  sleep(0.1);
 }
