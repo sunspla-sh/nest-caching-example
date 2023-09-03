@@ -1,0 +1,15 @@
+version: '3'
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - '3000:3000'
+  prometheus:
+    image: 'prom/prometheus:latest'
+    command: "--enable-feature=native-histograms --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus --web.console.libraries=/usr/share/prometheus/console_libraries --web.console.templates=/usr/share/prometheus/consoles"
+    volumes:
+      - ./prometheus:/etc/prometheus
+    ports:
+      - '9090:9090'
