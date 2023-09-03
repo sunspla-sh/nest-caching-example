@@ -1,7 +1,7 @@
 import { thresholdSettings, breakpointWorkload } from './config.js';
 import { catsGet } from './cats.get.js';
 
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'http://localhost:3001';
 
 export default function () {
   catsGet(baseUrl);
